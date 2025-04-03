@@ -1,14 +1,17 @@
 package com.voxloud.provisioning.service;
 
-import java.util.Properties;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Properties;
+
 import org.springframework.stereotype.Component;
+
+import com.voxloud.provisioning.config.ProvisioningProperties;
+import com.voxloud.provisioning.entity.Device;
 
 @Component
 public class DeskConfigurationGenerator implements ConfigurationGenerator {
     
-    @Override
     public String generateConfiguration(Device device, ProvisioningProperties props) {
         return String.format(
             "username=%s\n" +
@@ -46,5 +49,9 @@ public class DeskConfigurationGenerator implements ConfigurationGenerator {
         } catch (Exception e) {
             throw new RuntimeException("Failed to merge configurations", e);
         }
+    }
+
+    public String generateConfiguration(Device device, Object props) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

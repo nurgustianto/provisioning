@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
-public class ProvisioningServiceImpl implements ProvisioningService {
+public class ProvisioningServiceImpl extends ProvisioningService {
     
     private final DeviceRepository deviceRepository;
     private final ProvisioningProperties properties;
@@ -26,7 +26,6 @@ public class ProvisioningServiceImpl implements ProvisioningService {
         );
     }
     
-    @Override
     public String getConfiguration(String macAddress) {
         Device device = deviceRepository.findById(macAddress)
             .orElseThrow(() -> new IllegalArgumentException("Device not found"));

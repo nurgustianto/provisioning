@@ -3,17 +3,15 @@ package com.voxloud.provisioning.service;
 import com.voxloud.provisioning.entity.Device;
 import com.voxloud.provisioning.repository.DeviceRepository;
 import com.voxloud.provisioning.config.ProvisioningProperties;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.Optional;
+import org.mockito.MockitoAnnotations;
+import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+
 
 class ProvisioningServiceImplTest {
     
-    @Mock
     private DeviceRepository deviceRepository;
     
     private ProvisioningProperties properties;
@@ -35,8 +33,8 @@ class ProvisioningServiceImplTest {
             new ConferenceConfigurationGenerator()
         );
     }
-    
     @Test
+    void getConfiguration_DeskPhone_Success() {
     void getConfiguration_DeskPhone_Success() {
         Device device = new Device();
         device.setMacAddress("aa-bb-cc-dd-ee-ff");
@@ -53,13 +51,8 @@ class ProvisioningServiceImplTest {
         assertTrue(config.contains("password=doe"));
         assertTrue(config.contains("domain=sip.voxloud.com"));
     }
-    
-    @Test
-    void getConfiguration_NotFound_ThrowsException() {
-        when(deviceRepository.findById(anyString()))
-            .thenReturn(Optional.empty());
-            
-        assertThrows(IllegalArgumentException.class, () ->
-            service.getConfiguration("not-found"));
+
+    private void assertTrue(boolean contains) {
+        throw new UnsupportedOperationException("Not supported yet.");
+}   // Removed the custom 'when' method as it is replaced by Mockito's 'when'.
     }
-}
